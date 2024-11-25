@@ -1,16 +1,22 @@
 <div>
-    <div>
-        {{ $name }} doesn't talk, he acts.
-    </div>
-
     <form
-     wire:submit="changeName(document.querySelector('#newName').value)"
+        wire:submit="changeName()"
     >
         <div class="mt-2">
-            <input
-                id="newName"
+            <select
                 type="text"
-                class="block w-full p-4 border rounded-md bg-gray-700 text-white"
+                wire:model.fill="greeting"
+                class="px-8 py-2 border rounded-md bg-gray-700 text-white"
+            >
+                <option value="Hello">Hello</option>
+                <option value="Hi">Hi</option>
+                <option value="Hey" selected>Hey</option>
+            </select>
+
+            <input
+                type="text"
+                wire:model="name"
+                class="p-2 border rounded-md bg-gray-700 text-white"
             >
 
             <div class="mt-2">
@@ -23,4 +29,9 @@
             </div>
         </div>
     </form>
+    @if($name !== '')
+        <div>
+            {{ $greeting }} there! {{ $name }} doesn't talk, he acts.
+        </div>
+    @endif
 </div>
